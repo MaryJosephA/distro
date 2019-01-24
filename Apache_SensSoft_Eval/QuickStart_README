@@ -1,0 +1,56 @@
+--QUICK START INSTRUCTIONS FOR APACHE SENSSOFT T&E CONTAINER--
+
+*Please also refer to Apache_SensSoft_Package_Manifest.txt for description of files and directories*
+
+1.  First, build Apache SensSoft backend container 
+
+	a. cd into .../Apache_SensSoft_Backend_docker/
+	b. Follow the instructions in README.md file to build a single-node docker container for SensSoft with (Elasticsearch, Logstash, Kibana, and supporting assets). View on GitHub for fully enabled markdown (https://github.com/apache/incubator-senssoft/tree/master/docker).
+		1. Can be deployed on e
+        2. Instructions include build environment dependencies (Docker ^1.7)
+		3. Instructions include configs for virtual machine config
+        4. Instructions include build scripts
+        5. Includes test webpage with built in UserALE.js script tag
+        6. Includes pre-build Kibana visualizations and dashboards for user behavior visualization
+        7. Includes a metricbeat container that produces additional Kibana dashboards for examining container health and various container performance metrics as userale.js data is collected.
+        
+2. Next, explore UserALE.js
+    
+    A. Test and Explore Page-Level, Script-Tag UserALE.js Deployment Options:
+        
+        1. A pre-built version of UserALE.js (userale-1.1.0.min.js) is packaged in Apache_SensSoft_Eval
+        2. index.html is a very simple webpage with a userale.js script tag used for testing page-level deployments of userale via the script tag. This is useful for exploring different params for userale.js passed through the script tag format.
+            a. Open index.html in a javascript editor (e.g., Brackets)
+            b. Modify the 'src' field to reflect the complete file path of the userale-1.1.0.min.js file in the Apacehe_SensSoft_Eval folder (identical to what you would include in Prod environments for logging).
+            c. Reference Apache_SensSoft_useralejs_build/README.md for userale.js parameter options. 
+            d. Edit/Add parameters as desired in index.html
+            e. Drag index.hmtl into your browser and start interacting with the page (anywhere, including the button)
+            f. index.html is configured to send logs to Logstash at localhost:8100. They can explore them in Kibana (assumming Apache SensSoft backend was built first).
+            
+        *!WARNING!* BY DEFAULT, USERALE.JS COLLECTS KEY DOWN EVENTS, BUT DOES NOT LOG KEYS PRESSED. THIS PREVENTS CAPTURING SENSITIVE FORM/PASSWORD DATA. MODIFYING THE 'data-log-details' PARAMETER to =TRUE (default is FALSE) WILL ENABLE USERALE.JS TO COLLECT BOTH KEY DOWN EVENTS AND THE KEYS PRESSED. EXERCISE CAUTION WHEN EXPLORING THIS PARAMETER IN AFTER DEPLOYING USERALE.JS IN PROD WEBSITES/TOOLS OR SITES OTHER THAN THE SAMPLE APACHE WEBSITE OR INDEX.HTML. 
+            
+    B. Explore UserALE.js Web Extension Logs
+    
+        1. In Chrome, navigate to https://chrome.google.com/webstore/detail/mjokngpggfnbgjgdkbegggomijoeakfn
+        2. At this page, a UserALE.js extension can be directly downloaded from a non-public site (pending release) in the Chrome store.
+        3. Adding this to Chrome will include the UserALE.js extension in the Chrome browser.
+        4. Click on the new extension icon, or navigate to chrome://extensions/ 
+        5. Enable the extension
+        6. Click on 'Options' for modifyable parameters.
+        7. Ensure that 'User ALE Server Host' is set to http://localhost:8100.
+        8. Now any activity on any site within Chrome will be logged and can be viewed in Kibana.
+            a. Depending on how you collected userale.js prior to loading the userale index pattern in Kibana, you may have trouble visualizing certain fields--this has nothing to do with the raw data you collect. You just need to refresh the userale index in Kibana through Management -> Index Patterns. Instructions for this step are in the 'Having Issues' section of Apache_SensSoft_Backend_docker/README.md
+         
+        *NOTE* It is impossible to enable logging keys pressed in the Web Extension distributed in this T&E package. The only way to enable logging keys pressed in the Web Extension is to modify 'data-log-details' parameters in src, then rebuild and redeploy the web extension.
+            
+    
+    C. Explore UserALE.js script build pipeline and Unit Testing Utilities
+    
+        1. cd into /Apache_SensSoft_useralejs_build folder
+        2. Follow the instructions in README.md to build UserALE.js scripts. This build pipeline is a developer utility for modifying userale src code, and packaging new scripts.
+            a. Includes build environment dependencies (e.g., NPM)
+            b. Includes instructions for running both Build and Unit Testing scripts
+            c. Unit testing output prints directly in console. Src for tests is in /test folder.
+            d. Once built, /example/README.md has instructions for logging from index.html or the Web Extension in memory to a simple server at localhost:8000 (you will need to configure the logging enpoint manually back to prt 8000, or just use the index.html file found in the /example dir. Logs will appear in the /logs file, and in the console.
+            
+   

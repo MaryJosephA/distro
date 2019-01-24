@@ -1,0 +1,51 @@
+----Apache SensSoft Package Manifest----
+
+The following information and files can be found in this package:
+
+[1] Dependencies
+
+[1.1] Apache_SensSoft_Backend_Dependencies.txt 
+
+Lists functional and build dependencies for the Apache SensSoft Backend (Elasticsearch, Logstash, Kibana, Site).
+
+[1.2] Apache_SensSoft_useralejs_Dependencies.txt
+
+Lists build dependencies for Apache SensSoft UserALE.js logging script Backend
+
+[2] Software
+
+[2.1] Apache_SensSoft_useralejs_build
+
+UserALE.js src, Build, config src, test scripts, and test utilities
+Find full src and README.md: https://github.com/apache/incubator-senssoft-useralejs/tree/SENSSOFT-192
+
+There are known vulnerabilities with Gulp 3.9.1, which is a part of the dev/build pipeline of userale.js (not the production artifact, userale-1.1.0.min.js. The Apache SensSoft community is currently working to upgrade to Gulp 4.0.0.
+
+[2.2] userale-1.1.0.min.js (see Apache_SensSoft_useralejs_build/README.md)
+
+Pre-built UserALE.js script for testing and deploying.
+
+As this is a script, it has no known vulnerabilities.
+
+[2.3] index.html
+
+Simple webpage with embedded UserALE.js script tag, for testing (see Apache_SensSoft_useralejs_build/example/README.md)
+Additionally, can configure index.html to log to Backend (see below) by logging to localhost:8100.
+
+[2.4] Apache_SensSoft_Backend_docker (see Apache_SensSoft_Backend_docker/README.md)
+
+Build, config src and README.md for for the Apache SensSoft Backend (Elasticsearch, Logstash, Kibana, Site).
+Find full src and README.md: https://github.com/apache/incubator-senssoft/docker.
+
+This docker build has no known vulnerabilities after upgrading to current version of Elastic, Logstash, Kibana (v. 6.5.4)
+
+[3] Instructions
+
+[3.1] QuickStartREADME.txt
+
+General Get-Started Instructions for this Test and Eval Distribution
+
+[3.2] Platform Hosting Considerations (appended to Apache SensSoft.ppt
+
+General guidance from Elastic.co on VM allocation for large scale hosting, and Apache SensSoft docker distro recommended service models.
+

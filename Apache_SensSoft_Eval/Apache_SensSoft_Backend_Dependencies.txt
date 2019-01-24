@@ -1,0 +1,93 @@
+ -----incubator-senssoft-master Branch Dependencies-----
+ 
+ Distro: Apache_SensSoft_Eval/Apache_SensSoft_Backend_docker
+
+ Note: after deploying as per .../Apache_SensSoft_Backend_docker/README.md, to list dependencies for a given image:
+ 
+ #list docker images
+ $docker images
+ 
+ #list docker image dependency, by image
+ $docker image inspect [image name]
+ 
+ ------Build Dependencies-----
+ "DockerVersion": "18.09.0", (or Latest)
+ Used for build and configuration between other images. 
+ 
+ ------Functional Dependencies-----
+ 
+ ELASTICSEARCH Image Dependencies (Production/Functional Dependency)
+ -Elasticsearch is Apache SensSoft's backend indexing, storage, search, and query utility.
+ 
+docker-compose up -d elasticsearch
+            "Labels": {
+                "license": "Apache-2.0",
+                "org.label-schema.build-date": "20181205",
+                "org.label-schema.license": "GPLv2",
+                "org.label-schema.name": "elasticsearch",
+                "org.label-schema.schema-version": "1.0",
+                "org.label-schema.url": "https://www.elastic.co/products/elasticsearch",
+                "org.label-schema.vcs-url": "https://github.com/elastic/elasticsearch-docker",
+                "org.label-schema.vendor": "Elastic",
+                "org.label-schema.version": "6.5.4"
+                
+Logstash Image Dependencies (Production/Functional Dependency)
+-Logstash exposes UserALE.js logging endpoint, performs mutations, filtering ops, and applies index pattern before logs
+are sent to Elasticsearch.
+ 
+            "Labels": {
+                "license": "Apache-2.0",
+                "org.label-schema.build-date": "20181205",
+                "org.label-schema.license": "GPLv2",
+                "org.label-schema.name": "logstash",
+                "org.label-schema.schema-version": "1.0",
+                "org.label-schema.url": "https://www.elastic.co/products/logstash",
+                "org.label-schema.vcs-url": "https://github.com/elastic/logstash-docker",
+                "org.label-schema.vendor": "Elastic",
+                "org.label-schema.version": "6.5.4"
+ 
+Kibana Image Dependencies (Production/Functional Dependency)
+-Kibana provides visualization capabilities for logs indexed and stored in Elasticsearch.
+
+            "Labels": {
+                "license": "Apache-2.0",
+                "org.label-schema.build-date": "20181205",
+                "org.label-schema.license": "GPLv2",
+                "org.label-schema.name": "kibana",
+                "org.label-schema.schema-version": "1.0",
+                "org.label-schema.url": "https://www.elastic.co/products/kibana",
+                "org.label-schema.vcs-url": "https://github.com/elastic/kibana-docker",
+                "org.label-schema.vendor": "Elastic",
+                "org.label-schema.version": "6.5.4"
+
+Ruby Image Dependencies (Production/Functional Dependency)
+-Ruby is a dependency for Logstash--functions and plugins for Logstash are written and parsed in Ruby.
+
+"Id": "sha256:f28a9e1d0449a75ac4baa10614da765e9ed09fc4478a6f71e9c4436234395af3",
+"RepoTags": [
+            "ruby:latest"
+                "PATH=/usr/local/bundle/bin:/usr/local/bundle/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUBY_MAJOR=2.6",
+                "RUBY_VERSION=2.6.0",
+                "RUBY_DOWNLOAD_SHA256=acb00f04374899ba8ee74bbbcb9b35c5c6b1fd229f1876554ee76f0f1710ff5f",
+                "GEM_HOME=/usr/local/bundle",
+                "BUNDLE_PATH=/usr/local/bundle",
+                "BUNDLE_SILENCE_ROOT_WARNING=1",
+                "BUNDLE_APP_CONFIG=/usr/local/bundle"
+
+SITE Image Dependencies (Test Dependency Only)
+-Site is a test version of the Apache SensSoft website, instrumented with UserALE.js. This is used
+for generating initial logs for indexing (for test), and for testing logging throughput
+
+"Id": "sha256:0cd8140382e7b604c40f1a7fc6e679d2019da777a466a6c632c9f1cab5af1249",
+"RepoTags": [
+            "docker_site:latest"
+            "Env": [
+                "PATH=/usr/local/bundle/bin:/usr/local/bundle/gems/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "RUBY_MAJOR=2.6",
+                "RUBY_VERSION=2.6.0",
+                "RUBY_DOWNLOAD_SHA256=acb00f04374899ba8ee74bbbcb9b35c5c6b1fd229f1876554ee76f0f1710ff5f",
+                "GEM_HOME=/usr/local/bundle",
+                "BUNDLE_PATH=/usr/local/bundle",
+                "BUNDLE_SILENCE_ROOT_WARNING=1",
+                "BUNDLE_APP_CONFIG=/usr/local/bundle"

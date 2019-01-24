@@ -1,0 +1,38 @@
+-----incubator-senssoft-useralejs/SENSSOFT-192 Branch Dependencies-----
+
+Note: UserALE.js is a simple script that is referenced by a modifiable script-tag embedded in web pages or deployed as a browser plugin (see README.md). Therefore, UserALE.js doesn't have any dependencies when deployed. However, to (re)build UserALE.js (after src modification), a gulp/npm build-pipeline is used. This pipeline has numerous linting, minifying, and testing utilities with dependencies. These are listed below:
+
+------Functional Dependencies-----
+
+n/a
+
+------Build Dependencies-----
+
+Note: Build requires npm/node.js, as per README.md
+Note: after building as per README.md, to list dependencies for a given image:
+
+#Discover top level npm package dependencies (to move further down dependency tree, increase 'depth' param
+$ npm ls --depth=0
+
+useralejs@1.1.0 /Users/jpoore/Documents/Apache_SensSoft/Dev/incubator-senssoft-useralejs-SENSSOFT-192
+├── babel-preset-es2015@6.24.1
+├── babel-register@6.26.0
+├── body-parser@1.18.3
+├── chai@3.5.0
+├── del@2.2.2
+├── express@4.16.4
+├── gulp@3.9.1
+├── gulp-eslint@3.0.1
+├── gulp-filter@5.1.0
+├── gulp-json-modify@1.0.2
+├── gulp-mocha@6.0.0
+├── gulp-rename@1.4.0
+├── gulp-replace@0.5.4
+├── gulp-uglify@2.1.2
+├── gulp-util@3.0.8
+├── jsdom@8.5.0
+├── nodemon@1.18.9
+├── rollup@0.26.7
+├── rollup-plugin-json@2.3.1
+├── sinon@1.17.7
+└── uglify-js-harmony@2.7.7
